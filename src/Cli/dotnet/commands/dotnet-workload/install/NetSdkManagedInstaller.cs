@@ -127,7 +127,7 @@ namespace Microsoft.DotNet.Workloads.Workload.Install
 
             foreach (var (deletablePack, featureBand) in deletablePacks)
             {
-                DeletePackInstallationRecord(deletablePack, featureBand);
+                //DeletePackInstallationRecord(deletablePack, featureBand);
                 if (!PackHasInstallRecords(deletablePack))
                 {
                     DeletePack(deletablePack);
