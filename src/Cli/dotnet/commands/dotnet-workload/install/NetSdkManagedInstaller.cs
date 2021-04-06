@@ -127,7 +127,7 @@ namespace Microsoft.DotNet.Workloads.Workload.Install
 
             foreach (var (deletablePack, featureBand) in deletablePacks)
             {
-                //DeletePackInstallationRecord(deletablePack, featureBand);
+                DeletePackInstallationRecord(deletablePack, featureBand);
                 if (!PackHasInstallRecords(deletablePack))
                 {
                     DeletePack(deletablePack);
@@ -275,24 +275,24 @@ namespace Microsoft.DotNet.Workloads.Workload.Install
             File.WriteAllText(path, string.Empty);
         }
 
-        private void DeletePackInstallationRecord(PackInfo packInfo, SdkFeatureBand featureBand)
+        private void DeletePackInstallationRecord(PackInfo packInfo, SdkFeatureBand featureBand) 
         {
             var packInstallRecord = GetPackInstallRecordPath(packInfo, featureBand);
             if (File.Exists(packInstallRecord))
             {
                 File.Delete(packInstallRecord);
 
-                var packRecordVersionDir = Path.GetDirectoryName(packInstallRecord);
-                if (!Directory.EnumerateFileSystemEntries(packRecordVersionDir).Any())
-                {
-                    Directory.Delete(packRecordVersionDir);
+                //var packRecordVersionDir = Path.GetDirectoryName(packInstallRecord);
+                //if (!Directory.EnumerateFileSystemEntries(packRecordVersionDir).Any())
+                //{
+                //    Directory.Delete(packRecordVersionDir);
 
-                    var packRecordIdDir = Path.GetDirectoryName(packRecordVersionDir);
-                    if (!Directory.EnumerateFileSystemEntries(packRecordIdDir).Any())
-                    {
-                        Directory.Delete(packRecordIdDir);
-                    }
-                }
+                //    var packRecordIdDir = Path.GetDirectoryName(packRecordVersionDir);
+                //    if (!Directory.EnumerateFileSystemEntries(packRecordIdDir).Any())
+                //    {
+                //        Directory.Delete(packRecordIdDir);
+                //    }
+                //}
             }
         }
 
