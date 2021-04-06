@@ -298,8 +298,10 @@ namespace Microsoft.DotNet.Workloads.Workload.Install
 
         private bool PackHasInstallRecords(PackInfo packInfo)
         {
-            var packInstallRecordDir = Path.Combine(_workloadMetadataDir, _installedPacksDir, packInfo.Id, packInfo.Version);
-            return Directory.Exists(packInstallRecordDir) && Directory.EnumerateFileSystemEntries(packInstallRecordDir).Any();
+            throw new Exception();
+
+            //var packInstallRecordDir = Path.Combine(_workloadMetadataDir, _installedPacksDir, packInfo.Id, packInfo.Version);
+            //return Directory.Exists(packInstallRecordDir) && Directory.EnumerateFileSystemEntries(packInstallRecordDir).Any();
         }
 
         private bool isSingleFilePack(PackInfo packInfo) => packInfo.Kind.Equals(WorkloadPackKind.Library) || packInfo.Kind.Equals(WorkloadPackKind.Template);

@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -183,8 +184,16 @@ namespace Microsoft.DotNet.Cli.Workload.Install.Tests
                     Directory.CreateDirectory(pack.Path);
                 }
             }
-
-            installer.GarbageCollectInstalledWorkloadPacks();
+            try
+            {
+                installer.GarbageCollectInstalledWorkloadPacks();
+            }
+            catch (Exception e)
+            {
+                var files = new string[] { installedPacksPath, Path.Combine(installedPacksPath, packs[0].Id, packs[0].Version), Path.Combine(installedPacksPath, packs[1].Id, packs[1].Version) };
+                var handles = files.Select(file => $"File: {file}, Handles: " + GetAllHandles(file));
+                (e.Message + " " + string.Join(" ", handles)).Should().BeEmpty();
+            }
 
             Directory.EnumerateFileSystemEntries(installedPacksPath)
                 .Should()
@@ -251,5 +260,50 @@ namespace Microsoft.DotNet.Cli.Workload.Install.Tests
             INuGetPackageInstaller nugetInstaller = failingInstaller ? new FailingNuGetPackageInstaller(testDirectory) :  new MockNuGetPackageInstaller(dotnetRoot);
             return (dotnetRoot, new MockManagedInstaller(_reporter, nugetInstaller, dotnetRoot, manifestDir), nugetInstaller);
         }
+
+
+
+
+        public static string GetAllHandles(string filePath)
+        {
+            var pathToHandles = FindHandlePath();
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            processStartInfo.CreateNoWindow = true;
+            processStartInfo.FileName = pathToHandles;
+            processStartInfo.WorkingDirectory = Environment.CurrentDirectory;
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.RedirectStandardOutput = true;
+
+            processStartInfo.Arguments = " -accepteula -a " + filePath.ToString();
+
+            var process = Process.Start(processStartInfo);
+            var handlesDump = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            return handlesDump;
+        }
+
+        private static string FindHandlePath()
+        {
+            string executableDirectory = Path.GetDirectoryName(typeof(GivenNetSdkManagedWorkloadInstall).Assembly.Location);
+            string candidatePath = Path.Combine(executableDirectory, "handle.exe");
+
+            if (File.Exists(candidatePath))
+            {
+                return candidatePath;
+            }
+
+            // It's possible we might be running out of the Tools\xUnit directory, so let's
+            // see if it's in a path relative to our parent.
+            candidatePath = Path.Combine(executableDirectory, @"..\Handle\handle.exe");
+
+            if (File.Exists(candidatePath))
+            {
+                return candidatePath;
+            }
+
+            throw new Exception("Unable to find handle.exe!");
+        }
+
     }
 }
