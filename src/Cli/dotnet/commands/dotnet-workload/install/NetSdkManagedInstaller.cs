@@ -282,24 +282,24 @@ namespace Microsoft.DotNet.Workloads.Workload.Install
             {
                 File.Delete(packInstallRecord);
 
-                //var packRecordVersionDir = Path.GetDirectoryName(packInstallRecord);
-                //if (!Directory.EnumerateFileSystemEntries(packRecordVersionDir).Any())
-                //{
-                //    Directory.Delete(packRecordVersionDir);
+                var packRecordVersionDir = Path.GetDirectoryName(packInstallRecord);
+                if (!Directory.GetFileSystemEntries(packRecordVersionDir).Any())
+                {
+                    Directory.Delete(packRecordVersionDir);
 
-                //    var packRecordIdDir = Path.GetDirectoryName(packRecordVersionDir);
-                //    if (!Directory.EnumerateFileSystemEntries(packRecordIdDir).Any())
-                //    {
-                //        Directory.Delete(packRecordIdDir);
-                //    }
-                //}
+                    var packRecordIdDir = Path.GetDirectoryName(packRecordVersionDir);
+                    if (!Directory.GetFileSystemEntries(packRecordIdDir).Any())
+                    {
+                        Directory.Delete(packRecordIdDir);
+                    }
+                }
             }
         }
 
         private bool PackHasInstallRecords(PackInfo packInfo)
         {
             var packInstallRecordDir = Path.Combine(_workloadMetadataDir, _installedPacksDir, packInfo.Id, packInfo.Version);
-            return Directory.Exists(packInstallRecordDir) && Directory.EnumerateFileSystemEntries(packInstallRecordDir).Any();
+            return Directory.Exists(packInstallRecordDir) && Directory.GetFileSystemEntries(packInstallRecordDir).Any();
         }
 
         private bool isSingleFilePack(PackInfo packInfo) => packInfo.Kind.Equals(WorkloadPackKind.Library) || packInfo.Kind.Equals(WorkloadPackKind.Template);
