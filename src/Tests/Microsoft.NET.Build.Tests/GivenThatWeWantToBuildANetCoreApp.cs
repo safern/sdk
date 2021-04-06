@@ -42,7 +42,7 @@ namespace Microsoft.NET.Build.Tests
             return new BuildCommand(testAsset);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         //  TargetFramework, RuntimeFrameworkVersion, ExpectedPackageVersion, ExpectedRuntimeFrameworkVersion
         [InlineData("netcoreapp1.0", null, "1.0.5", "1.0.5")]
         [InlineData("netcoreapp1.0", "1.0.0", "1.0.0", "1.0.0")]
@@ -63,7 +63,7 @@ namespace Microsoft.NET.Build.Tests
         }
 
         //  Test behavior when implicit version differs for framework-dependent and self-contained apps
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp1.0", false, true, "1.0.5")]
         [InlineData("netcoreapp1.0", true, true, "1.0.16")]
         [InlineData("netcoreapp1.0", false, false, "1.0.5")]
@@ -85,7 +85,7 @@ namespace Microsoft.NET.Build.Tests
             It_targets_the_right_framework(testIdentifier, targetFramework, null, selfContained, isExe, expectedFrameworkVersion, expectedFrameworkVersion);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void The_RuntimeFrameworkVersion_can_float()
         {
             var testProject = new TestProject()
@@ -191,7 +191,7 @@ namespace Microsoft.NET.Build.Tests
             netCoreAppLibrary.Version.ToString().Should().Be(expectedPackageVersion);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(false)]
         [InlineData(true)]
         public void It_handles_mismatched_implicit_package_versions(bool allowMismatch)
@@ -242,7 +242,7 @@ namespace Microsoft.NET.Build.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_restores_only_ridless_tfm()
         {
             var testAsset = _testAssetsManager
@@ -268,7 +268,7 @@ namespace Microsoft.NET.Build.Tests
             targetDefs.Should().Contain(".NETCoreApp,Version=v2.1");
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp2.0")]
         [InlineData("netcoreapp2.1")]
         [InlineData("netcoreapp3.0")]
@@ -277,7 +277,7 @@ namespace Microsoft.NET.Build.Tests
             RunAppFromOutputFolder("RunFromOutputFolder_" + targetFramework, false, false, targetFramework);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp2.1")]
         [InlineData("netcoreapp3.0")]
         public void It_runs_a_rid_specific_app_from_the_output_folder(string targetFramework)
@@ -285,7 +285,7 @@ namespace Microsoft.NET.Build.Tests
             RunAppFromOutputFolder("RunFromOutputFolderWithRID_" + targetFramework, true, false, targetFramework);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp2.0")]
         [InlineData("netcoreapp3.0")]
         public void It_runs_the_app_with_conflicts_from_the_output_folder(string targetFramework)
@@ -298,7 +298,7 @@ namespace Microsoft.NET.Build.Tests
             RunAppFromOutputFolder("RunFromOutputFolderConflicts_" + targetFramework, false, true, targetFramework);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp2.0")]
         [InlineData("netcoreapp3.0")]
         public void It_runs_a_rid_specific_app_with_conflicts_from_the_output_folder(string targetFramework)
@@ -375,7 +375,7 @@ public static class Program
 
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp2.0")]
         [InlineData("netcoreapp3.0")]
         public void It_trims_conflicts_from_the_deps_file(string targetFramework)
@@ -438,7 +438,7 @@ public static class Program
             }
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public void It_generates_rid_fallback_graph(bool isSelfContained)
@@ -482,7 +482,7 @@ public static class Program
             }
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void There_are_no_conflicts_when_targeting_netcoreapp_1_1()
         {
             var testProject = new TestProject()
@@ -504,7 +504,7 @@ public static class Program
                 .NotHaveStdOutMatching("Encountered conflict", System.Text.RegularExpressions.RegexOptions.CultureInvariant | System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public void It_publishes_package_satellites_correctly(bool crossTarget)
@@ -549,7 +549,7 @@ public static class Program
             outputDirectory.Should().HaveFile(Path.Combine("fr", "Humanizer.resources.dll"));
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_uses_lowercase_form_of_the_target_framework_for_the_output_path()
         {
             var testProject = new TestProject()
@@ -585,7 +585,7 @@ public static class Program
                 .BeEquivalentTo("netcoreapp1.1");
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void BuildWithTransitiveReferenceToNetCoreAppPackage()
         {
             var testProject = new TestProject()
@@ -693,7 +693,7 @@ class Program
                 .Pass();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void ItHasNoPackageReferences()
         {
             var testProject = new TestProject()
@@ -744,7 +744,7 @@ class Program
                 .Pass();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_regenerates_files_if_self_contained_changes()
         {
             const string TFM = "netcoreapp3.0";
@@ -787,7 +787,7 @@ class Program
             runtimeConfigLastWriteTime.Should().NotBe(File.GetLastWriteTimeUtc(runtimeConfigPath));
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_passes_when_building_single_file_app_without_rid()
         {
             GetBuildCommand()
@@ -796,7 +796,7 @@ class Program
                 .Pass();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_errors_when_publishing_single_file_without_apphost()
         {
             GetBuildCommand()

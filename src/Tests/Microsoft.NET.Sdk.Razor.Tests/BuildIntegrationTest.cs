@@ -50,7 +50,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             new FileInfo(Path.Combine(outputPath, "SimpleMvc.Views.pdb")).Should().NotExist();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_SimpleMvc_NoopsWithRazorCompileOnBuild_False()
         {
             var testAsset = "RazorSimpleMvc";
@@ -67,7 +67,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             new FileInfo(Path.Combine(outputPath, "SimpleMvc.Views.pdb")).Should().NotExist();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_ErrorInGeneratedCode_ReportsMSBuildError()
         {
             var testAsset = "RazorSimpleMvc";
@@ -95,7 +95,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             new FileInfo(Path.Combine(intermediateOutputPath, "SimpleMvc.dll")).Should().NotExist();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_WithP2P_CopiesRazorAssembly()
         {
             var testAsset = "RazorAppWithP2PReference";
@@ -116,7 +116,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             new FileInfo(Path.Combine(outputPath, "ClassLibrary.Views.pdb")).Should().NotExist();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_WithViews_ProducesDepsFileWithCompilationContext_ButNoReferences()
         {
             var testAsset = "RazorSimpleMvc";
@@ -145,7 +145,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             new DirectoryInfo(Path.Combine(outputPath, "publish", "refs")).Should().NotExist();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_WithPreserveCompilationReferencesEnabled_ProducesRefsDirectory()
         {
             var testAsset = "RazorSimpleMvc";
@@ -165,7 +165,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             new FileInfo(Path.Combine(outputPath, "refs", "mscorlib.dll")).Should().Exist();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_AddsApplicationPartAttributes()
         {
             var testAsset = "RazorSimpleMvc";
@@ -183,7 +183,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
 
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_DoesNotAddRelatedAssemblyPart_IfViewCompilationIsDisabled()
         {
             var testAsset = "RazorSimpleMvc";
@@ -199,7 +199,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             new FileInfo(Path.Combine(intermediateOutputPath, "SimpleMvc.RazorTargetAssemblyInfo.cs")).Should().NotExist();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_WithP2P_WorksWhenBuildProjectReferencesIsDisabled()
         {
             var testAsset = "RazorAppWithP2PReference";
@@ -235,7 +235,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             build.Execute("/p:BuildProjectReferences=false").Should().Pass();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_WithP2P_Referencing21Project_Works()
         {
             // Verifies building with different versions of Razor.Tasks works. Loosely modeled after the repro
@@ -266,7 +266,7 @@ namespace Microsoft.NET.Sdk.Razor.Tests
             new FileInfo(Path.Combine(outputPath, "ClassLibraryMvc21.Views.dll")).Should().Exist();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Build_WithStartupObjectSpecified_Works()
         {
             var testAsset = "RazorSimpleMvc";

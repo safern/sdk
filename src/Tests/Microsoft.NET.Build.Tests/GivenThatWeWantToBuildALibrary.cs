@@ -26,7 +26,7 @@ namespace Microsoft.NET.Build.Tests
         {
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netstandard1.5")]
         [InlineData("netcoreapp2.1")]
         [InlineData("netcoreapp3.0")]
@@ -52,7 +52,7 @@ namespace Microsoft.NET.Build.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_builds_the_library_twice_in_a_row()
         {
             var testAsset = _testAssetsManager
@@ -148,7 +148,7 @@ namespace Microsoft.NET.Build.Tests
             return testAsset;
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("cs")]
         [InlineData("vb")]
         public void It_creates_a_documentation_file(string language)
@@ -180,7 +180,7 @@ namespace Microsoft.NET.Build.Tests
             }, SearchOption.TopDirectoryOnly);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("cs", true)]
         [InlineData("cs", false)]
         [InlineData("vb", true)]
@@ -223,7 +223,7 @@ namespace Microsoft.NET.Build.Tests
             new DirectoryInfo(libraryProjectDirectory).Should().OnlyHaveFiles(expectedProjectDirectoryFiles, SearchOption.TopDirectoryOnly);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("cs", true)]
         [InlineData("cs", false)]
         [InlineData("vb", true)]
@@ -257,7 +257,7 @@ namespace Microsoft.NET.Build.Tests
             }, SearchOption.TopDirectoryOnly);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Restore_succeeds_even_if_the_project_extension_is_for_a_different_language()
         {
             var testAsset = _testAssetsManager
@@ -279,7 +279,7 @@ namespace Microsoft.NET.Build.Tests
                 .Pass();
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("Debug", "DEBUG")]
         [InlineData("Release", "RELEASE")]
         [InlineData("CustomConfiguration", "CUSTOMCONFIGURATION")]
@@ -309,7 +309,7 @@ namespace Microsoft.NET.Build.Tests
             "NETSTANDARD1_3_OR_GREATER", "NETSTANDARD1_4_OR_GREATER", "NETSTANDARD1_5_OR_GREATER" });
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(".NETStandard,Version=v1.0", new[] { "NETSTANDARD", "NETSTANDARD1_0", "NETSTANDARD1_0_OR_GREATER" })]
         [InlineData("netstandard1.3", new[] { "NETSTANDARD", "NETSTANDARD1_3", "NETSTANDARD1_0_OR_GREATER", "NETSTANDARD1_1_OR_GREATER", "NETSTANDARD1_2_OR_GREATER", "NETSTANDARD1_3_OR_GREATER" })]
         [InlineData("netstandard1.6", new[] { "NETSTANDARD", "NETSTANDARD1_6", "NETSTANDARD1_0_OR_GREATER", "NETSTANDARD1_1_OR_GREATER", "NETSTANDARD1_2_OR_GREATER",
@@ -384,7 +384,7 @@ namespace Microsoft.NET.Build.Tests
             definedConstants.Should().BeEquivalentTo(new[] { "DEBUG", "TRACE" }.Concat(expectedDefines).ToArray());
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(new string[] { }, "windows", "10.0.18362.0", new[] { "WINDOWS", "WINDOWS10_0_18362_0", "WINDOWS7_0_OR_GREATER", "WINDOWS8_0_OR_GREATER", "WINDOWS10_0_17763_0_OR_GREATER", "WINDOWS10_0_18362_0_OR_GREATER" })]
         [InlineData(new[] { "1.0", "1.1" }, "ios", "1.1", new[] { "IOS", "IOS1_1", "IOS1_0_OR_GREATER", "IOS1_1_OR_GREATER" })]
         [InlineData(new[] { "11.11", "12.12", "13.13" }, "android", "12.12", new[] { "ANDROID", "ANDROID12_12", "ANDROID11_11_OR_GREATER", "ANDROID12_12_OR_GREATER" })]
@@ -536,7 +536,7 @@ class Program
             stdOut.Should().BeEquivalentTo(expectedOutput);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(false)]
         [InlineData(true)]
         public void It_fails_gracefully_if_targetframework_is_empty(bool useSolution)
@@ -546,7 +546,7 @@ class Program
                 $"The TargetFramework value '{targetFramework}' was not recognized");
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(false)]
         [InlineData(true)]
         public void It_fails_gracefully_if_targetframework_is_invalid(bool useSolution)
@@ -556,7 +556,7 @@ class Program
                 $"The TargetFramework value '{targetFramework}' was not recognized");
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(false)]
         [InlineData(true)]
         public void It_fails_gracefully_if_targetframework_should_be_targetframeworks(bool useSolution)
@@ -602,7 +602,7 @@ class Program
             }
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("net5.0")]
         [InlineData("netcoreapp3.1")]
         public void It_defines_windows_version_default_correctly(string targetFramework)
@@ -698,7 +698,7 @@ class Program
                 .And.NotHaveStdOutContaining(">="); // old error about comparing empty string to version when TargetFramework was blank;
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp6.1")]
         [InlineData("netstandard2.2")]
         public void It_fails_to_build_if_targeting_a_higher_framework_than_is_supported(string targetFramework)
@@ -728,7 +728,7 @@ class Program
                 .And.HaveStdOutContaining("The current .NET SDK does not support targeting");
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_passes_ridless_target_to_compiler()
         {
             var runtimeIdentifier = EnvironmentInfo.GetCompatibleRid("netcoreapp2.0");
@@ -774,7 +774,7 @@ class Program
                 .Pass();
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_can_target_uwp_using_sdk_extras()
         {
             var testAsset = _testAssetsManager
@@ -788,7 +788,7 @@ class Program
                 .Pass();
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(null)]
         [InlineData(true)]
         [InlineData(false)]
@@ -837,7 +837,7 @@ class Program
             }
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp2.2", null, false, null, false)]
         [InlineData("netcoreapp3.0", null, true, null, true)]
         [InlineData("netcoreapp3.0", "LatestMajor", true, null, true)]
@@ -904,7 +904,7 @@ class Program
 
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp3.1")]
         [InlineData("netcoreapp5.0")]
         public void It_makes_RootNamespace_safe_when_project_name_has_spaces(string targetFramework)

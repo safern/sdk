@@ -26,7 +26,7 @@ namespace Microsoft.DotNet.Cli.Workload.Install.Tests
             _manifestPath = Path.Combine(_testAssetsManager.GetAndValidateTestProjectDirectory("SampleManifest"), "Sample.json");
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void GivenWorkloadInstallItCanInstallPacks()
         {
             var mockWorkloadIds = new WorkloadId[] { new WorkloadId("xamarin-android") };
@@ -44,7 +44,7 @@ namespace Microsoft.DotNet.Cli.Workload.Install.Tests
             _reporter.Lines.Contains(string.Format(LocalizableStrings.InstallationSucceeded, "xamarin-android"));
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void GivenWorkloadInstallItCanRollBackPackInstallation()
         {
             var mockWorkloadIds = new WorkloadId[] { new WorkloadId("xamarin-android"), new WorkloadId("xamarin-android-build") };

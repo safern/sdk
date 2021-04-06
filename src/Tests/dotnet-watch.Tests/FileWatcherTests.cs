@@ -27,7 +27,7 @@ namespace Microsoft.DotNet.Watcher.Tools
         private readonly ITestOutputHelper _output;
         private readonly TestAssetsManager _testAssetManager;
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public async Task NewFile(bool usePolling)
@@ -59,7 +59,7 @@ namespace Microsoft.DotNet.Watcher.Tools
             Assert.Equal(testFileFullPath, filesChanged.Single());
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public async Task ChangeFile(bool usePolling)
@@ -106,7 +106,7 @@ namespace Microsoft.DotNet.Watcher.Tools
             Assert.Equal(testFileFullPath, filesChanged.Single());
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public async Task MoveFile(bool usePolling)
@@ -152,7 +152,7 @@ namespace Microsoft.DotNet.Watcher.Tools
             Assert.Contains(dstFile, filesChanged);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public async Task FileInSubdirectory()
         {
             var dir = _testAssetManager.CreateTestDirectory().Path;
@@ -196,7 +196,7 @@ namespace Microsoft.DotNet.Watcher.Tools
             Assert.Contains(testFileFullPath, filesChanged);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public async Task NoNotificationIfDisabled(bool usePolling)
@@ -231,7 +231,7 @@ namespace Microsoft.DotNet.Watcher.Tools
             await Assert.ThrowsAsync<TimeoutException>(() => changedEv.Task.TimeoutAfter(NegativeTimeout));
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public async Task DisposedNoEvents(bool usePolling)
@@ -264,7 +264,7 @@ namespace Microsoft.DotNet.Watcher.Tools
             await Assert.ThrowsAsync<TimeoutException>(() => changedEv.Task.TimeoutAfter(NegativeTimeout));
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public async Task MultipleFiles(bool usePolling)
@@ -314,7 +314,7 @@ namespace Microsoft.DotNet.Watcher.Tools
             Assert.Equal(testFileFullPath, filesChanged.Single());
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public async Task MultipleTriggers(bool usePolling)
@@ -380,7 +380,7 @@ namespace Microsoft.DotNet.Watcher.Tools
             }
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true)]
         [InlineData(false)]
         public async Task DeleteSubfolder(bool usePolling)

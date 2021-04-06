@@ -135,7 +135,7 @@ namespace Microsoft.NET.Build.Tests
         }
 
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(false, false)]
         [InlineData(true, true)]
         public void ReferencedExeCanRun(bool mainSelfContained, bool referencedSelfContained)
@@ -148,7 +148,7 @@ namespace Microsoft.NET.Build.Tests
             RunTest(true);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void ReferencedExeWithLowerTargetFrameworkCanRun()
         {
             MainSelfContained = false;
@@ -164,7 +164,7 @@ namespace Microsoft.NET.Build.Tests
 
         //  Having a self-contained and a framework-dependent app in the same folder is not supported (due to the way the host works).
         //  The referenced app will fail to run.  See here for more details: https://github.com/dotnet/sdk/pull/14488#issuecomment-725406998
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(true, false)]
         [InlineData(false, true)]
         public void ReferencedExeFailsToRun(bool mainSelfContained, bool referencedSelfContained)
@@ -177,7 +177,7 @@ namespace Microsoft.NET.Build.Tests
             RunTest(referencedExeShouldRun: false);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData(false)]
         [InlineData(true)]
         public void ReferencedExeCanRunWhenPublished(bool selfContained)
@@ -192,7 +192,7 @@ namespace Microsoft.NET.Build.Tests
             RunTest(referencedExeShouldRun: true);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void ReferencedExeCanRunWhenPublishedWithTrimming()
         {
             MainSelfContained = true;

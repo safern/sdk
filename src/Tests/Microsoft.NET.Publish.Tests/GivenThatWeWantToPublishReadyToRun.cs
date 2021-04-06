@@ -21,7 +21,7 @@ namespace Microsoft.NET.Publish.Tests
         {
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp3.0")]
         [InlineData("net5.0")]
         [InlineData("net6.0")]
@@ -50,7 +50,7 @@ namespace Microsoft.NET.Publish.Tests
             publishDirectory.Should().HaveFile("System.Private.CoreLib.dll"); // self-contained
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp3.0")]
         [InlineData("net5.0")]
         [InlineData("net6.0")]
@@ -93,7 +93,7 @@ namespace Microsoft.NET.Publish.Tests
             publishDirectory.Should().HaveFile("System.Private.CoreLib.dll"); // self-contained
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp3.0")]
         [InlineData("net5.0")]
         [InlineData("net6.0")]
@@ -102,7 +102,7 @@ namespace Microsoft.NET.Publish.Tests
             TestProjectPublishing_Internal("CrossgenTest3", targetFramework, emitNativeSymbols: true);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp3.0")]
         [InlineData("net5.0")]
         [InlineData("net6.0")]
@@ -111,7 +111,7 @@ namespace Microsoft.NET.Publish.Tests
             TestProjectPublishing_Internal("FrameworkDependent", targetFramework, isSelfContained: false, emitNativeSymbols:true);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp3.0")]
         [InlineData("net5.0")]
         [InlineData("net6.0")]
@@ -167,7 +167,7 @@ namespace Microsoft.NET.Publish.Tests
                 .And.HaveStdOutContainingIgnoreCase("NETSDK1095");
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_warns_when_targetting_netcoreapp_2_x_readytorun()
         {
             var testProject = new TestProject()
@@ -189,7 +189,7 @@ namespace Microsoft.NET.Publish.Tests
                 .HaveStdOutContaining(Strings.PublishReadyToRunRequiresVersion30);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp3.0")]
         [InlineData("net5.0")]
         [InlineData("net6.0")]
@@ -198,7 +198,7 @@ namespace Microsoft.NET.Publish.Tests
             TestProjectPublishing_Internal("LibraryProject1", targetFramework, isSelfContained: false, makeExeProject: false);
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp3.0")]
         [InlineData("net5.0")]
         [InlineData("net6.0")]

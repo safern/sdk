@@ -94,7 +94,7 @@ namespace Microsoft.NET.Build.Tests
             });
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("netcoreapp2.1")]
         [InlineData("netcoreapp2.2")]
         [InlineData("netcoreapp3.0")] // only on macOS
@@ -229,7 +229,7 @@ namespace Microsoft.NET.Build.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void If_UseAppHost_is_false_it_does_not_try_to_find_an_AppHost()
         {
             var testProject = new TestProject()
@@ -253,7 +253,7 @@ namespace Microsoft.NET.Build.Tests
 
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void It_retries_on_failure_to_create_apphost()
         {
             const string TFM = "net5.0";

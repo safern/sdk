@@ -19,7 +19,7 @@ namespace Microsoft.DotNet.Tests.ParserTests
             this.output = output;
         }
 
-        [Theory]
+        [Theory(Skip = "tmp")]
         [InlineData("build /p:prop=true", "build")]
         [InlineData("add package", "add")]
         [InlineData("watch run", "watch")]

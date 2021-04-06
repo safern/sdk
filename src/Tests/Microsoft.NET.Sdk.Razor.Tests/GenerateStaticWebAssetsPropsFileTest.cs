@@ -14,7 +14,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
 {
     public class GenerateStaticWebAssetsPropsFileTest
     {
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Fails_WhenStaticWebAsset_DoesNotContainSourceType()
         {
             // Arrange
@@ -47,7 +47,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
             errorMessages.Should().ContainSingle(message => message == expectedError);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Fails_WhenStaticWebAsset_DoesNotContainSourceId()
         {
             // Arrange
@@ -80,7 +80,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
             errorMessages.Should().ContainSingle(message => message == expectedError);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Fails_WhenStaticWebAsset_DoesNotContainContentRoot()
         {
             // Arrange
@@ -113,7 +113,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
             errorMessages.Should().ContainSingle(message => message == expectedError);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Fails_WhenStaticWebAsset_DoesNotContainBasePath()
         {
             // Arrange
@@ -146,7 +146,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
             errorMessages.Should().ContainSingle(message => message == expectedError);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Fails_WhenStaticWebAsset_DoesNotContainRelativePath()
         {
             // Arrange
@@ -179,7 +179,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
             errorMessages.Should().ContainSingle(message => message == expectedError);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Fails_WhenStaticWebAsset_HaveDifferentSourceType()
         {
             // Arrange
@@ -224,7 +224,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
             errorMessages.Should().ContainSingle(message => message == expectedError);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void Fails_WhenStaticWebAsset_HaveDifferentSourceId()
         {
             // Arrange
@@ -314,7 +314,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
             errorMessages.Should().ContainSingle(message => message == expectedError);
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void WritesPropsFile_WhenThereIsAtLeastOneStaticAsset()
         {
             // Arrange
@@ -369,7 +369,7 @@ namespace Microsoft.NET.Sdk.Razor.Test
             }
         }
 
-        [Fact]
+        [Fact(Skip = "tmp")]
         public void WritesIndividualItems_WithTheirRespectiveBaseAndRelativePaths()
         {
             // Arrange
