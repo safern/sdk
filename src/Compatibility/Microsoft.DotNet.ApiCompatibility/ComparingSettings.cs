@@ -29,7 +29,7 @@ namespace Microsoft.DotNet.ApiCompatibility
         public IEqualityComparer<ISymbol> EqualityComparer { get; }
 
         /// <summary>
-        /// Instanciates an object with the desired settings.
+        /// Instantiate an object with the desired settings.
         /// </summary>
         /// <param name="ruleRunnerFactory">The factory to create a <see cref="IRuleRunner"/></param>
         /// <param name="filter">The symbol filter.</param>
