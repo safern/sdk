@@ -18,6 +18,20 @@ namespace Microsoft.DotNet.ApiCompatibility.Tests
 {
     public class AssemblyIdentityMustMatchTests : SdkTest
     {
+        private static readonly byte[] _publicKey = new byte[]
+        { 
+            0, 36, 0, 0, 4, 128, 0, 0, 148, 0, 0, 0, 6, 2, 0, 0, 0, 36, 0, 0,
+            82, 83, 65, 49, 0, 4, 0, 0, 1, 0, 1, 0, 59, 95, 150, 159, 243, 67,
+            213, 101, 13, 42, 127, 1, 28, 70, 32, 249, 95, 32, 222, 178, 241,
+            112, 43, 130, 179, 253, 136, 12, 214, 69, 99, 48, 108, 1, 225, 85,
+            43, 140, 249, 91, 96, 28, 32, 96, 222, 101, 30, 186, 118, 74, 97, 47,
+            90, 203, 33, 109, 13, 224, 26, 68, 113, 252, 132, 189, 45, 113, 37, 194,
+            246, 28, 250, 11, 142, 65, 158, 36, 69, 33, 123, 215, 206, 43, 179, 174,
+            44, 66, 108, 152, 199, 61, 182, 176, 126, 115, 72, 67, 1, 234, 122, 214,
+            208, 240, 99, 182, 103, 113, 54, 95, 253, 54, 249, 70, 150, 123, 230, 135,
+            122, 189, 56, 195, 25, 62, 141, 151, 88, 234, 231, 156
+        };
+
         public AssemblyIdentityMustMatchTests(ITestOutputHelper log) : base(log) { }
 
         [Fact]
@@ -144,20 +158,13 @@ namespace Microsoft.DotNet.ApiCompatibility.Tests
             Assert.Equal(expected, differences.First(), CompatDifferenceComparer.Default);
         }
 
-        [RequiresMSBuildVersionFact("17.0.0.32901")]
+        [Fact]
         public void AssemblyKeyTokenMustBeCompatible()
         {
-            var testAsset = _testAssetsManager
-                .CopyTestAsset("PublicKeyTokenValidation")
-                .WithSource();
+            string syntax = "namespace EmptyNs { }";
 
-            BuildCommand buildCommand = new(testAsset);
-            buildCommand.Execute().Should().Pass();
-
-            string leftDllPath = Path.Combine(buildCommand.GetOutputDirectory("netstandard2.0").FullName, "PublicKeyTokenValidation.dll");
-            string rightDllPath = Path.Combine(buildCommand.GetOutputDirectory("net6.0").FullName, "PublicKeyTokenValidation.dll");
-            IAssemblySymbol leftSymbols = new AssemblySymbolLoader().LoadAssembly(leftDllPath);
-            IAssemblySymbol rightSymbols = new AssemblySymbolLoader().LoadAssembly(rightDllPath);
+            IAssemblySymbol leftSymbols = SymbolFactory.GetAssemblyFromSyntax(syntax, publicKey: _publicKey);
+            IAssemblySymbol rightSymbols = SymbolFactory.GetAssemblyFromSyntax(syntax, publicKey: _publicKey);
 
             // public key tokens must match
             ApiComparer differ = new();
